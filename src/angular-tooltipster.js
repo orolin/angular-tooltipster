@@ -8,14 +8,13 @@
                 tooltipOptions: "="
             },
             link: function(scope, element, attrs) {
-                var isTooltipDynamicVariable = 'tooltipTitleVariable' in attrs;
+                var isTooltipDynamicVariable = (scope.tooltipTitleVariable !== undefined);
                 
                 if (!scope.tooltipTitle && !isTooltipDynamicVariable) {
                     return;
                 }
                 
                 var tooltipOptions = scope.tooltipOptions || {};
-                
                 var message = scope.tooltipTitle;
                 if (isTooltipDynamicVariable) {
                     message = scope.tooltipTitleVariable;
