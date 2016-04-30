@@ -9,7 +9,7 @@
             },
             link: function(scope, element, attrs) {
                 var isTooltipDynamicVariable = (scope.tooltipTitleVariable !== undefined);
-                
+
                 if (!scope.tooltipTitle && !isTooltipDynamicVariable) {
                     return;
                 }
@@ -21,7 +21,6 @@
                     scope.$watch('tooltipTitleVariable', function(value) {
                         element.tooltipster('content', value);
                         if (!value) {
-                            element.tooltipster('hide');
                             element.tooltipster('disable');
                         } else {
                             element.tooltipster('enable');
@@ -31,6 +30,10 @@
 
                 tooltipOptions.content = message;
                 element.tooltipster(tooltipOptions);
+
+                scope.$on("$destroy", function () {
+                    element.tooltipster('destroy');
+                })
             }
 	    }	
 	});
